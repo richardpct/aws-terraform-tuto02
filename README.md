@@ -1,5 +1,5 @@
 # Purpose
-This example takes up [my first tutorial](https://github.com/richardpct/aws-terraform-tuto01) by using modules feature.
+This example takes up my first [tutorial](https://github.com/richardpct/aws-terraform-tuto01) by using the modules feature.
 
 # Requirement
 * You must have an aws account, if you don't have yet, you can subscribe the free tier.
