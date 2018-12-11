@@ -6,11 +6,11 @@ This example takes up my first [tutorial](https://github.com/richardpct/aws-terr
 * You must install terraform
 
 # Usage
-## Exporting the required variables from your terminal:
+## Exporting the required variables in your terminal:
     $ export TF_VAR_region="eu-west-3"
-    $ export TF_VAR_bucket="example-terraform-state"
-    $ export TF_VAR_dev_network_key="example/env/network/terraform.tfstate"
-    $ export TF_VAR_dev_webserver_key="example/env/webserver/terraform.tfstate"
+    $ export TF_VAR_bucket="mybucket-terraform-state"
+    $ export TF_VAR_dev_network_key="terraform/dev/network/terraform.tfstate"
+    $ export TF_VAR_dev_webserver_key="terraform/dev/webserver/terraform.tfstate"
     $ export TF_VAR_ssh_public_key="ssh-rsa ..."
 
 ## Creating the s3 backend to store the terraform state
