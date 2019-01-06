@@ -15,11 +15,6 @@ by using the modules feature.
     $ export TF_VAR_dev_webserver_key="terraform/dev/webserver/terraform.tfstate"
     $ export TF_VAR_ssh_public_key="ssh-rsa ..."
 
-## Creating the S3 backend to store the terraform state
-    $ cd 00-bucket
-    $ terraform init
-    $ terraform apply
-
 ## Creating the VPC
     $ cd ../01-network
     $ ./terraform_init.sh (execute this command once)
@@ -41,7 +36,7 @@ The last command displays the IP address of your webserver, wait a few seconds t
 
 Then open your web browser with the IP address of your webserver
 
-## Destroying all resources you have just created
+## Cleaning up
     $ cd ../02-webserver
     $ terraform destroy
     $ cd ../01-network
