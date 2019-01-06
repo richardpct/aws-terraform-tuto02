@@ -15,6 +15,10 @@ by using the modules feature.
     $ export TF_VAR_dev_webserver_key="terraform/dev/webserver/terraform.tfstate"
     $ export TF_VAR_ssh_public_key="ssh-rsa ..."
 
+## Creating the S3 backend to store the terraform state
+If you have not created a S3 backend, see my first tutorial
+[https://github.com/richardpct/aws-terraform-tuto01](https://github.com/richardpct/aws-terraform-tuto01)
+
 ## Creating the VPC
     $ cd ../01-network
     $ ./terraform_init.sh (execute this command once)
