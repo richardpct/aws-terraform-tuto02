@@ -1,47 +1,41 @@
 # Purpose
-This example takes up my first tutorial
-[https://github.com/richardpct/aws-terraform-tuto01](https://github.com/richardpct/aws-terraform-tuto01)
-by using the modules feature.
+This tutorial aims to show you how to build a simple AWS example using
+Terraform. The example I choose is [Getting Started with IPv4 for Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/getting-started-ipv4.html?shortFooter=true)
 
-# Requirement
-* You must have an AWS account, if you don't have yet, you can subscribe to the free tier.
-* You must install terraform
+# Requirements
+* You must have an AWS account, if you don't already have one, you can subscribe
+to the free tier
+* You must install Terraform v0.11.14
 
 # Usage
-## Exporting the required variables in your terminal:
-    $ export TF_VAR_region="eu-west-3"
-    $ export TF_VAR_bucket="mybucket-terraform-state"
-    $ export TF_VAR_dev_network_key="terraform/dev/network/terraform.tfstate"
-    $ export TF_VAR_dev_webserver_key="terraform/dev/webserver/terraform.tfstate"
-    $ export TF_VAR_ssh_public_key="ssh-rsa ..."
-
-## Creating the S3 backend to store the terraform state
-If you have not created a S3 backend, see my first tutorial
+## Creating the S3 backend to store the Terraform states
+If you have not already created a S3 backend, follow my first tutorial
 [https://github.com/richardpct/aws-terraform-tuto01](https://github.com/richardpct/aws-terraform-tuto01)
 
-## Creating the VPC
-    $ cd 01-network
-    $ ./terraform_init.sh (execute this command once)
-    $ terraform apply
+## Setting up the required variables
+Fill the values into the samples/aws-terraform-tuto02.tfvars file according to
+your needs.
 
-## Creating the webserver
-    $ cd ../02-webserver
-    $ ./terraform_init.sh (execute this command once)
-    $ terraform apply
+## Initializing your Terraform working directory
+    $ cd aws-terraform-tuto02
+    $ make init
+
+## Creating the VPC and webserver
+    $ cd aws-terraform-tuto02
+    $ make apply
 
 ## Installing apache2
-The last command displays the IP address of your webserver, wait a few seconds then connect to it via ssh:
+The previous command displays the EIP address associated with the webserver,
+wait a few seconds then connect into it through SSH:
 
     $ ssh admin@xx.xx.xx.xx
-    $ sudo su -
+    $ sudo -i
     $ apt-get update
     $ apt-get upgrade
-    $ apt-get install apache2
+    $ apt-get install -y apache2
 
-Then open your web browser with the IP address of your webserver
+Then open your web browser using the IP address of your webserver
 
 ## Cleaning up
-    $ cd ../02-webserver
-    $ terraform destroy
-    $ cd ../01-network
-    $ terraform destroy
+    $ cd aws-terraform-tuto02
+    $ make destroy
