@@ -13,8 +13,8 @@ If you have not already created a S3 backend, follow my first tutorial
 [https://github.com/richardpct/aws-terraform-tuto01](https://github.com/richardpct/aws-terraform-tuto01)
 
 ## Setting up the required variables
-Fill the values into the samples/aws-terraform-tuto02.tfvars file according to
-your needs.
+Copy terraform.tfvars-sample into 02-webserver/terraform.tfvars, then fill the
+values according to your needs.
 
 ## Initializing your Terraform working directory
     $ cd aws-terraform-tuto02
@@ -26,7 +26,7 @@ your needs.
 
 ## Installing apache2
 The previous command displays the EIP address associated with the webserver,
-wait a few seconds then connect into it through SSH:
+wait a few seconds then connect to it through SSH:
 
     $ ssh admin@xx.xx.xx.xx
     $ sudo -i

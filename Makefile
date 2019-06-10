@@ -5,16 +5,16 @@ destroy destroy_webserver destroy_network
 
 .DEFAULT_GOAL := apply
 
-init: init_webserver
-clean: clean_network clean_webserver
-apply: apply_webserver
-destroy: destroy_network
-
-TFVARS = $$HOME/terraform_secrets/aws-terraform-tuto02.tfvars
+TFVARS = 02-webserver/terraform.tfvars
 BUCKET = $(shell awk '/bucket/{print $$NF}' ${TFVARS})
 REGION = $(shell awk '/region/{print $$NF}' ${TFVARS})
 NETWORK_KEY = $(shell awk '/_network_key/{print $$NF}' ${TFVARS})
 WEBSERVER_KEY = $(shell awk '/_webserver_key/{print $$NF}' ${TFVARS})
+
+init: init_webserver
+clean: clean_network clean_webserver
+apply: apply_webserver
+destroy: destroy_network
 
 init_network:
 	cd 01-network; \
@@ -40,24 +40,24 @@ clean_webserver:
 
 apply_network:
 	cd 01-network; \
-	terraform apply -auto-approve -var-file="${TFVARS}"
+	terraform apply -auto-approve
 	@touch $@
 
 apply_webserver: apply_network
 	cd 02-webserver; \
-	terraform apply -auto-approve -var-file="${TFVARS}"
+	terraform apply -auto-approve
 	@touch $@
 
 destroy_webserver:
 ifeq ($(shell [ -f apply_webserver ] && echo exists), exists)
 	cd 02-webserver; \
-	terraform destroy -auto-approve -var-file="${TFVARS}"
+	terraform destroy -auto-approve
 	@rm -f apply_webserver
 endif
 
 destroy_network: destroy_webserver
 ifeq ($(shell [ -f apply_network ] && echo exists), exists)
 	cd 01-network; \
-	terraform destroy -auto-approve -var-file="${TFVARS}"
+	terraform destroy -auto-approve
 	@rm -f apply_network
 endif
