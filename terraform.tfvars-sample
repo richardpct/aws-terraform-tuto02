@@ -1,5 +1,0 @@
-region            = "eu-west-3"
-bucket            = "xxxx-terraform-state"
-dev_network_key   = "terraform/dev/network/terraform.tfstate"
-dev_webserver_key = "terraform/dev/webserver/terraform.tfstate"
-ssh_public_key    = "ssh-rsa xxxx"

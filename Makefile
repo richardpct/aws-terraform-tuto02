@@ -5,11 +5,7 @@ destroy destroy_webserver destroy_network
 
 .DEFAULT_GOAL := apply
 
-TFVARS = 02-webserver/terraform.tfvars
-BUCKET = $(shell awk '/bucket/{print $$NF}' ${TFVARS})
-REGION = $(shell awk '/region/{print $$NF}' ${TFVARS})
-NETWORK_KEY = $(shell awk '/_network_key/{print $$NF}' ${TFVARS})
-WEBSERVER_KEY = $(shell awk '/_webserver_key/{print $$NF}' ${TFVARS})
+TFVARS = aws-terraform-tuto02.tfvars
 
 init: init_webserver
 clean: clean_network clean_webserver
@@ -17,18 +13,20 @@ apply: apply_webserver
 destroy: destroy_network
 
 init_network:
+	. ${TFVARS}; \
 	cd 01-network; \
 	terraform init \
-	-backend-config="bucket=${BUCKET}" \
-	-backend-config="key=${NETWORK_KEY}" \
-	-backend-config="region=${REGION}"
+	-backend-config="bucket=$$TF_VAR_bucket" \
+	-backend-config="key=$$TF_VAR_network_key" \
+	-backend-config="region=$$TF_VAR_region"
 
 init_webserver: init_network
+	. ${TFVARS}; \
 	cd 02-webserver; \
 	terraform init \
-	-backend-config="bucket=${BUCKET}" \
-	-backend-config="key=${WEBSERVER_KEY}" \
-	-backend-config="region=${REGION}"
+	-backend-config="bucket=$$TF_VAR_bucket" \
+	-backend-config="key=$$TF_VAR_webserver_key" \
+	-backend-config="region=$$TF_VAR_region"
 
 clean_network:
 	rm -rf 01-network/.terraform
@@ -44,12 +42,14 @@ apply_network:
 	@touch $@
 
 apply_webserver: apply_network
+	. ${TFVARS}; \
 	cd 02-webserver; \
 	terraform apply -auto-approve
 	@touch $@
 
 destroy_webserver:
 ifeq ($(shell [ -f apply_webserver ] && echo exists), exists)
+	. ${TFVARS}; \
 	cd 02-webserver; \
 	terraform destroy -auto-approve
 	@rm -f apply_webserver

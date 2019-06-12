@@ -1,0 +1,7 @@
+# Terraform variables
+
+export TF_VAR_region="eu-west-3"
+export TF_VAR_bucket="xxx-terraform-state"
+export TF_VAR_network_key="terraform/dev/network/terraform.tfstate"
+export TF_VAR_webserver_key="terraform/dev/webserver/terraform.tfstate"
+export TF_VAR_ssh_public_key="ssh-rsa xxx..."

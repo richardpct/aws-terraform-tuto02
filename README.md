@@ -1,6 +1,7 @@
 # Purpose
 This tutorial aims to show you how to build a simple AWS example using
-Terraform. The example I choose is [Getting Started with IPv4 for Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/getting-started-ipv4.html?shortFooter=true)
+Terraform. The example I choose is
+[Getting Started with IPv4 for Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/getting-started-ipv4.html?shortFooter=true)
 
 # Requirements
 * You must have an AWS account, if you don't already have one, you can subscribe
@@ -13,8 +14,8 @@ If you have not already created a S3 backend, follow my first tutorial
 [https://github.com/richardpct/aws-terraform-tuto01](https://github.com/richardpct/aws-terraform-tuto01)
 
 ## Setting up the required variables
-Copy terraform.tfvars-sample into 02-webserver/terraform.tfvars, then fill the
-values according to your needs.
+Copy aws-terraform-tuto02.tfvars-sample into aws-terraform-tuto02.tfvars, then
+fill the values according to your needs.
 
 ## Initializing your Terraform working directory
     $ cd aws-terraform-tuto02
@@ -34,7 +35,7 @@ wait a few seconds then connect to it through SSH:
     $ apt-get upgrade
     $ apt-get install -y apache2
 
-Then open your web browser using the IP address of your webserver
+Then open your web browser and use the IP address of your webserver
 
 ## Cleaning up
     $ cd aws-terraform-tuto02
