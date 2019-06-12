@@ -5,7 +5,7 @@ provider "aws" {
 data "terraform_remote_state" "network" {
   backend = "s3"
 
-  config {
+  config = {
     bucket = "${var.network_remote_state_bucket}"
     key    = "${var.network_remote_state_key}"
     region = "${var.region}"
@@ -19,9 +19,9 @@ resource "aws_key_pair" "deployer" {
 
 resource "aws_security_group" "webserver" {
   name   = "sg_webserver"
-  vpc_id = "${data.terraform_remote_state.network.vpc_id}"
+  vpc_id = data.terraform_remote_state.network.outputs.vpc_id
 
-  tags {
+  tags = {
     Name = "webserver sg"
   }
 }
@@ -57,10 +57,10 @@ resource "aws_instance" "web" {
   ami                    = "${var.image_id}"
   instance_type          = "${var.instance_type}"
   key_name               = "${aws_key_pair.deployer.key_name}"
-  subnet_id              = "${data.terraform_remote_state.network.subnet_public_id}"
+  subnet_id              = data.terraform_remote_state.network.outputs.subnet_public_id
   vpc_security_group_ids = ["${aws_security_group.webserver.id}"]
 
-  tags {
+  tags = {
     Name = "Web Server"
   }
 }

@@ -6,7 +6,7 @@ Terraform. The example I choose is
 # Requirements
 * You must have an AWS account, if you don't already have one, you can subscribe
 to the free tier
-* You must install Terraform v0.11.14
+* You must install Terraform v0.12.X
 
 # Usage
 ## Creating the S3 backend to store the Terraform states

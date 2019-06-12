@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_vpc" "my_vpc" {
   cidr_block = "${var.vpc_cidr_block}"
 
-  tags {
+  tags = {
     Name = "my_vpc"
   }
 }
@@ -13,7 +13,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_internet_gateway" "my_igw" {
   vpc_id = "${aws_vpc.my_vpc.id}"
 
-  tags {
+  tags = {
     Name = "my_igw"
   }
 }
@@ -22,7 +22,7 @@ resource "aws_subnet" "public" {
   vpc_id     = "${aws_vpc.my_vpc.id}"
   cidr_block = "${var.subnet_public}"
 
-  tags {
+  tags = {
     Name = "subnet_public"
   }
 }
@@ -35,7 +35,7 @@ resource "aws_default_route_table" "route" {
     gateway_id = "${aws_internet_gateway.my_igw.id}"
   }
 
-  tags {
+  tags = {
     Name = "default route"
   }
 }
