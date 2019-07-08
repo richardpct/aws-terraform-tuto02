@@ -3,10 +3,15 @@ clean clean_network clean_webserver \
 apply \
 destroy destroy_webserver destroy_network
 
-.DEFAULT_GOAL := apply
-TMP           := $(CURDIR)/.tmp
-VPATH         := $(TMP)
-TFVARS        ?= aws-terraform-tuto02.tfvars
+.DEFAULT_GOAL    := apply
+TMP              := $(CURDIR)/.tmp
+VPATH            := $(TMP)
+TFVARS           ?= aws-terraform-tuto02.tfvars
+TERRAFORM_EXISTS := $(shell which terraform)
+
+ifndef TERRAFORM_EXISTS
+  $(error terraform is not found)
+endif
 
 init:    init_webserver
 apply:   apply_webserver
