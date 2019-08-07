@@ -23,7 +23,7 @@ fill the values according to your needs.
 
 ## Creating the VPC and webserver
     $ cd aws-terraform-tuto02
-    $ make apply
+    $ make all
 
 ## Installing apache2
 The previous command displays the EIP address associated with the webserver,
