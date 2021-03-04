@@ -2,16 +2,6 @@ provider "aws" {
   region = var.region
 }
 
-data "terraform_remote_state" "network" {
-  backend = "s3"
-
-  config = {
-    bucket = var.network_remote_state_bucket
-    key    = var.network_remote_state_key
-    region = var.region
-  }
-}
-
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
   public_key = var.ssh_public_key

@@ -10,3 +10,7 @@
 
 # tmp directory
 .tmp
+
+.terraform.lock.hcl
+
+terraform_init.sh
