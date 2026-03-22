@@ -1,5 +1,11 @@
-provider "aws" {
-  region = var.region
+data "terraform_remote_state" "network" {
+  backend = "s3"
+
+  config = {
+    bucket = var.network_remote_state_bucket
+    key    = var.network_remote_state_key
+    region = var.region
+  }
 }
 
 resource "aws_key_pair" "deployer" {
@@ -51,11 +57,11 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.webserver.id]
 
   tags = {
-    Name = "Web Server"
+    Name = "web server"
   }
 }
 
 resource "aws_eip" "web" {
   instance = aws_instance.web.id
-  vpc      = true
+  domain   = "vpc"
 }
